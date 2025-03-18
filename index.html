@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariadoe.com - Portfolio Créatif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+    <meta name="description" content="Mariadoe, une femme parfaite.">
+  <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-pink-50">
+    <nav class="fixed w-full bg-white/80 backdrop-blur-lg z-50 shadow-sm" x-data="{ isOpen: false }">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold gradient-text">Mariadoe</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-pink-500 transition-colors">Accueil</a>
+                <a href="projets" class="hover:text-pink-500 transition-colors" data-page-id="6786677b5bdd5d45ef351547" id="page-link">Projets</a>
+                <a href="Compétences" class="hover:text-pink-500 transition-colors" id="page-link" data-page-id="67866dbc5bdd5d45ef351928">Compétences</a>
+                <a href="#contact" class="hover:text-pink-500 transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden" @click="isOpen = !isOpen">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div x-show="isOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg shadow-lg">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#home" class="hover:text-pink-500 transition-colors">Accueil</a>
+                <a href="projets" class="hover:text-pink-500 transition-colors" data-page-id="6786677b5bdd5d45ef351547" id="page-link">Projets</a>
+                <a href="Compétences" class="hover:text-pink-500 transition-colors" id="page-link" data-page-id="67866dbc5bdd5d45ef351928">Compétences</a>
+                <a href="#contact" class="hover:text-pink-500 transition-colors">Contact</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <header id="home" class="min-h-screen flex items-center pt-20">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-center md:text-left">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text animate-float">Maria Doe !</h1>
+                <p class="text-xl text-gray-600 mb-8">Développeuse Créative &amp; Designer UI/UX</p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#contact" class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity">Me contacter</a>
+                    <a href="projets" class="border-2 border-purple-500 text-purple-500 px-8 py-3 rounded-full hover:bg-purple-500 hover:text-white transition-colors" id="page-link" data-page-id="6786677b5bdd5d45ef351547">Voir mes projets</a>
+                </div>
+            </div>
+            <div class="animate-float perspective-1000" id="tilt-wrapper">
+                <img src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHw5fHxnaXJsfGVufDB8Mnx8fDE3MzY3MDU4Mjl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Portrait" class="rounded-full mx-auto shadow-2xl transition-all duration-100 ease-out transform-gpu" id="tilt-image">
+                <style>
+                    .perspective-1000 {
+                        perspective: 1000px;
+                    }
+                </style>
+                <script>
+                    const wrapper = document.getElementById('tilt-wrapper');
+                    const image = document.getElementById('tilt-image');
+                    let rafId = null;
+
+                    function updateTilt(e) {
+                        if (rafId) return;
+                        
+                        rafId = requestAnimationFrame(() => {
+                            const rect = wrapper.getBoundingClientRect();
+                            const centerX = rect.left + rect.width / 2;
+                            const centerY = rect.top + rect.height / 2;
+                            const mouseX = e.clientX - centerX;
+                            const mouseY = e.clientY - centerY;
+                            const rotateX = (mouseY / (rect.height / 2)) * -15;
+                            const rotateY = (mouseX / (rect.width / 2)) * 15;
+                            
+                            image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                            rafId = null;
+                        });
+                    }
+
+                    wrapper.addEventListener('mousemove', updateTilt);
+                    wrapper.addEventListener('mouseleave', () => {
+                        if (rafId) {
+                            cancelAnimationFrame(rafId);
+                            rafId = null;
+                        }
+                        image.style.transform = 'rotateX(0) rotateY(0)';
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</header><section x-data="{ currentSlide: 0 }" class="relative w-full mx-auto px-4 py-16">
+    <div class="overflow-hidden relative rounded-xl shadow-2xl">
+        <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+            <div class="min-w-full">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwxNXx8ZGVzaWdufGVufDB8MHx8fDE3MzcxMjUzNDl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Gallery Image 1" class="w-full h-[600px] object-cover">
+            </div>
+            <div class="min-w-full">
+                <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHw5fHxkZXNpZ258ZW58MHwwfHx8MTczNzEyNTM0OXww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Gallery Image 2" class="w-full h-[600px] object-cover">
+            </div>
+            <div class="min-w-full">
+                <img src="https://images.unsplash.com/photo-1493421419110-74f4e85ba126?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwxM3x8ZGVzaWdufGVufDB8MHx8fDE3MzcxMjUzNDl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Gallery Image 3" class="w-full h-[600px] object-cover">
+            </div>
+            <div class="min-w-full">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwxOHx8ZGVzaWdufGVufDB8MHx8fDE3MzcxMjUzNDl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Gallery Image 4" class="w-full h-[600px] object-cover">
+            </div>
+            <div class="min-w-full">
+                <img src="https://images.unsplash.com/photo-1416339442236-8ceb164046f8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwyM3x8ZGVzaWdufGVufDB8MHx8fDE3MzcxMjUzODh8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Gallery Image 5" class="w-full h-[600px] object-cover">
+            </div>
+        </div>
+
+        <button @click="currentSlide = currentSlide === 0 ? 4 : currentSlide - 1" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-4 rounded-full shadow-lg transition-all duration-300">
+            <i class="fa fa-chevron-left text-xl"></i>
+        </button>
+
+        <button @click="currentSlide = currentSlide === 4 ? 0 : currentSlide + 1" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-4 rounded-full shadow-lg transition-all duration-300">
+            <i class="fa fa-chevron-right text-xl"></i>
+        </button>
+
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <template x-for="(slide, index) in 5" :key="index">
+                <button @click="currentSlide = index" :class="{'bg-white': currentSlide === index, 'bg-white/50': currentSlide !== index}" class="w-3 h-3 rounded-full transition-all duration-300"></button>
+            </template>
+        </div>
+    </div>
+</section>
+
+    <section id="projects" class="py-20 bg-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 opacity-50"></div>
+    <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-purple-100/30 to-transparent"></div>
+    
+    <div class="container mx-auto px-6 relative">
+        <h2 class="text-6xl font-bold text-center mb-16 gradient-text animate-float">
+            <span class="relative inline-block before:content-[''] before:absolute before:-bottom-2 before:left-0 before:w-full before:h-1 before:bg-gradient-to-r before:from-purple-600 before:to-indigo-600 after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-1 after:bg-gradient-to-r after:from-pink-500 after:to-purple-500 after:transition-all after:duration-1000 hover:after:w-full">Mes Projets</span>
+        </h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
+            <div class="card-hover bg-white/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transform-gpu transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:rotate-y-10 group">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwyfHxwcm9qZWN0fGVufDB8MHx8fDE3MzY3MDU4NTF8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Projet 1" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="text-white text-sm font-medium">Cliquez pour voir plus</span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white/90 backdrop-blur-sm transform transition-transform duration-300">
+                    <h3 class="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Application Mobile E-commerce</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">Design et développement d'une application mobile de vente en ligne</p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm animate-float delay-0">React Native</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm animate-float delay-100">Firebase</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-hover bg-white/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transform-gpu transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:rotate-y-10 group">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwxNHx8d2Vic2l0ZXxlbnwwfDB8fHwxNzM2NzA1ODgwfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Projet 2" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="text-white text-sm font-medium">Cliquez pour voir plus</span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white/90 backdrop-blur-sm transform transition-transform duration-300">
+                    <h3 class="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Site Web Portfolio</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">Création d'un portfolio interactif pour un photographe</p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm animate-float delay-200">Next.js</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm animate-float delay-300">Tailwind</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-hover bg-white/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transform-gpu transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:rotate-y-10 group">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHw2fHx3ZWJzaXRlfGVufDB8MHx8fDE3MzY3MDU4ODB8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="Projet 3" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="text-white text-sm font-medium">Cliquez pour voir plus</span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white/90 backdrop-blur-sm transform transition-transform duration-300">
+                    <h3 class="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Dashboard Analytics</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">Interface d'administration pour une plateforme SaaS</p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm animate-float delay-400">Vue.js</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm animate-float delay-500">D3.js</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex items-center justify-center p-6 mt-12">
+            <a href="projets" id="page-link" data-page-id="6786677b5bdd5d45ef351547" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 bg-size-200 rounded-full overflow-hidden hover:bg-pos-100 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <span class="relative z-10 flex items-center">
+                    Voir plus
+                    <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-3 transition-transform duration-300"></i>
+                </span>
+                <div class="absolute inset-0 flex space-x-1 overflow-hidden">
+                    <div class="transform -skew-x-12 bg-white/20 animate-shine"></div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-white/20 to-purple-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </a>
+        </div>
+    </div>
+    
+    
+    
+    <style>
+        @keyframes shine {
+            from { transform: translateX(-100%) skewX(-12deg); }
+            to { transform: translateX(200%) skewX(-12deg); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-shine { animation: shine 2s infinite; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .delay-0 { animation-delay: 0s; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .bg-size-200 { background-size: 200% 100%; }
+        .bg-pos-100 { background-position: 100% 0; }
+        .perspective-1000 { perspective: 1000px; }
+        .rotate-y-10:hover { transform: rotateY(10deg); }
+        .card-hover:hover { transform: translateY(-5px) rotateY(10deg); }
+    </style>
+</section>
+
+    <section id="skills" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50 relative overflow-hidden">
+    
+    <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-5xl font-bold text-center mb-16 gradient-text animate-pulse tracking-wider">Compétences</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-1000">
+            <div class="skill-card bg-white p-8 rounded-2xl shadow-2xl text-center transform transition-all duration-500 hover:scale-105 hover:rotate-2 hover:bg-gradient-to-br from-pink-50 to-purple-100 backdrop-blur-sm">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <i class="fas fa-code text-5xl text-pink-500 mb-6 animate-float relative z-10"></i>
+                    <div class="absolute -top-2 -right-2 w-4 h-4 bg-pink-400 rounded-full animate-ping"></div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 hover:text-pink-600 transition-colors">Front-end</h3>
+                <p class="text-gray-600 mb-6">HTML, CSS, JavaScript</p>
+                <div class="skill-meter relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-pink-400 to-purple-500 transform -skew-x-12 animate-width-90"></div>
+                </div>
+                <div class="skill-details mt-4 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    <span class="text-sm text-gray-500">90% Maîtrise</span>
+                </div>
+            </div>
+            <div class="skill-card bg-white p-8 rounded-2xl shadow-2xl text-center transform transition-all duration-500 hover:scale-105 hover:rotate-2 hover:bg-gradient-to-br from-purple-50 to-indigo-100 backdrop-blur-sm">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <i class="fas fa-paint-brush text-5xl text-purple-500 mb-6 animate-float relative z-10"></i>
+                    <div class="absolute -top-2 -right-2 w-4 h-4 bg-purple-400 rounded-full animate-ping"></div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 hover:text-purple-600 transition-colors">Design UI/UX</h3>
+                <p class="text-gray-600 mb-6">Figma, Adobe XD, Sketch</p>
+                <div class="skill-meter relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-purple-400 to-indigo-500 transform -skew-x-12 animate-width-85"></div>
+                </div>
+                <div class="skill-details mt-4 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    <span class="text-sm text-gray-500">85% Maîtrise</span>
+                </div>
+            </div>
+            <div class="skill-card bg-white p-8 rounded-2xl shadow-2xl text-center transform transition-all duration-500 hover:scale-105 hover:rotate-2 hover:bg-gradient-to-br from-blue-50 to-cyan-100 backdrop-blur-sm">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <i class="fas fa-mobile-alt text-5xl text-blue-500 mb-6 animate-float relative z-10"></i>
+                    <div class="absolute -top-2 -right-2 w-4 h-4 bg-blue-400 rounded-full animate-ping"></div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 hover:text-blue-600 transition-colors">Mobile</h3>
+                <p class="text-gray-600 mb-6">React Native, Flutter</p>
+                <div class="skill-meter relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-blue-400 to-cyan-500 transform -skew-x-12 animate-width-80"></div>
+                </div>
+                <div class="skill-details mt-4 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    <span class="text-sm text-gray-500">80% Maîtrise</span>
+                </div>
+            </div>
+            <div class="skill-card bg-white p-8 rounded-2xl shadow-2xl text-center transform transition-all duration-500 hover:scale-105 hover:rotate-2 hover:bg-gradient-to-br from-green-50 to-emerald-100 backdrop-blur-sm">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <i class="fas fa-database text-5xl text-green-500 mb-6 animate-float relative z-10"></i>
+                    <div class="absolute -top-2 -right-2 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 hover:text-green-600 transition-colors">Back-end</h3>
+                <p class="text-gray-600 mb-6">Node.js, Python, MongoDB</p>
+                <div class="skill-meter relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-green-400 to-emerald-500 transform -skew-x-12 animate-width-95"></div>
+                </div>
+                <div class="skill-details mt-4 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    <span class="text-sm text-gray-500">95% Maîtrise</span>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-center p-6 mt-12">
+            <a href="Compétences" id="page-link" data-page-id="67866dbc5bdd5d45ef351928" class="group relative inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 rounded-full overflow-hidden hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transform hover:-translate-y-1">
+                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-pink-600 animate-gradient-x"></span>
+                <span class="absolute inset-0 w-full h-full opacity-0 hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-indigo-600 to-purple-600"></span>
+                <span class="relative z-10 flex items-center">
+                    Voir plus
+                    <i class="fa fa-arrow-right ml-3 transform group-hover:translate-x-2 transition-transform duration-300"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+    <style>
+        .bg-grid-pattern {
+            background-image: radial-gradient(circle, #6366f1 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes width-90 {
+            0% { width: 0%; }
+            100% { width: 90%; }
+        }
+        @keyframes width-85 {
+            0% { width: 0%; }
+            100% { width: 85%; }
+        }
+        @keyframes width-80 {
+            0% { width: 0%; }
+            100% { width: 80%; }
+        }
+        @keyframes width-95 {
+            0% { width: 0%; }
+            100% { width: 95%; }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        .animate-width-90 {
+            animation: width-90 1.5s ease-out forwards;
+        }
+        .animate-width-85 {
+            animation: width-85 1.5s ease-out forwards;
+        }
+        .animate-width-80 {
+            animation: width-80 1.5s ease-out forwards;
+        }
+        .animate-width-95 {
+            animation: width-95 1.5s ease-out forwards;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 200%;
+            animation: gradient 8s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .skill-card {
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+        @keyframes gradient-x {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .animate-gradient-x {
+            animation: gradient-x 3s linear infinite;
+            background-size: 200% 100%;
+        }
+    </style>
+</section><section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Questions Fréquentes</h2>
+        
+        <div class="space-y-4">
+            <details class="bg-white rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50 transition-all">
+                    <h3 class="text-lg font-semibold text-gray-800">Quels sont vos services en tant que Designer UI/UX ?</h3>
+                    <i class="fa fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform duration-300"></i>
+                </summary>
+                <div class="p-6 pt-0 text-gray-600 animate-[slideDown_0.2s_ease-out]">
+                    Je propose une gamme complète de services incluant la conception d'interfaces utilisateur, l'expérience utilisateur, le prototypage, les tests utilisateurs et la direction artistique pour sites web et applications mobiles.
+                </div>
+            </details>
+
+            <details class="bg-white rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50 transition-all">
+                    <h3 class="text-lg font-semibold text-gray-800">Comment se déroule votre processus de travail ?</h3>
+                    <i class="fa fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform duration-300"></i>
+                </summary>
+                <div class="p-6 pt-0 text-gray-600 animate-[slideDown_0.2s_ease-out]">
+                    Mon processus commence par une phase de découverte, suivie de recherches utilisateurs, wireframing, design UI, prototypage, et se termine par des tests et itérations pour assurer la meilleure expérience possible.
+                </div>
+            </details>
+
+            <details class="bg-white rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50 transition-all">
+                    <h3 class="text-lg font-semibold text-gray-800">Quels sont vos délais moyens de réalisation ?</h3>
+                    <i class="fa fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform duration-300"></i>
+                </summary>
+                <div class="p-6 pt-0 text-gray-600 animate-[slideDown_0.2s_ease-out]">
+                    Les délais varient selon la complexité du projet. Un site vitrine prend généralement 4-6 semaines, tandis qu'une application complète peut nécessiter 2-3 mois ou plus.
+                </div>
+            </details>
+
+            <details class="bg-white rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50 transition-all">
+                    <h3 class="text-lg font-semibold text-gray-800">Travaillez-vous à distance ?</h3>
+                    <i class="fa fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform duration-300"></i>
+                </summary>
+                <div class="p-6 pt-0 text-gray-600 animate-[slideDown_0.2s_ease-out]">
+                    Oui, je travaille principalement à distance avec des clients du monde entier, en utilisant des outils de collaboration comme Figma, Slack et Zoom pour maintenir une communication efficace.
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        details[open] summary ~ * {
+            animation: slideDown 0.2s ease-out;
+        }
+    </style>
+</section>
+
+    <section id="contact" class="py-20 relative">
+    <div class="container mx-auto px-6 relative">
+        <div class="flex flex-col items-center mb-16">
+            <h2 class="text-5xl font-bold text-center mb-4 tracking-tight gradient-text">Me Contacter</h2>
+            <div class="h-1 w-20 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
+        </div>
+        <div class="max-w-4xl mx-auto p-8 rounded-2xl shadow-2xl bg-black/40 backdrop-blur-md border border-white/20">
+            <form id="contactForm" class="space-y-8" onsubmit="sendEmail(event)">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="group">
+                        <label class="block text-white mb-2 font-medium transition-all group-focus-within:text-pink-400">Nom complet</label>
+                        <input type="text" name="name" required="" class="w-full px-6 py-4 rounded-xl border border-white/20 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all placeholder-white/50" placeholder="John Doe">
+                    </div>
+                    <div class="group">
+                        <label class="block text-white mb-2 font-medium transition-all group-focus-within:text-pink-400">Email</label>
+                        <input type="email" name="email" required="" class="w-full px-6 py-4 rounded-xl border border-white/20 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all placeholder-white/50" placeholder="john@example.com">
+                    </div>
+                </div>
+                <div class="group">
+                    <label class="block text-white mb-2 font-medium transition-all group-focus-within:text-pink-400">Message</label>
+                    <textarea name="message" required="" rows="6" class="w-full px-6 py-4 rounded-xl border border-white/20 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all placeholder-white/50" placeholder="Votre message ici..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white py-4 px-8 rounded-xl hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:-translate-y-1 font-medium text-lg">
+                    <span class="flex items-center justify-center gap-2">
+                        <span>Envoyer</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function sendEmail(e) {
+            e.preventDefault();
+            const form = e.target;
+            const name = form.name.value;
+            const email = form.email.value;
+            const message = form.message.value;
+            
+            const emailBody = `Nom: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+            const mailtoLink = `mailto:maria.doe@gmail.com?subject=Nouveau message de contact&body=${emailBody}`;
+            
+            const link = document.createElement('a');
+            link.href = mailtoLink;
+            link.click();
+            
+            form.reset();
+        }
+    </script>
+</section>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-4">Mariadoe</h3>
+                    <p class="text-gray-400">Créons ensemble quelque chose d'extraordinaire</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-pink-500 transition-colors"><i class="fab fa-twitter text-2xl"></i></a>
+                    <a href="#" class="hover:text-pink-500 transition-colors"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="#" class="hover:text-pink-500 transition-colors"><i class="fab fa-github text-2xl"></i></a>
+                    <a href="#" class="hover:text-pink-500 transition-colors"><i class="fab fa-dribbble text-2xl"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2024 Mariadoe. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('nav');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    nav.classList.add('shadow-md');
+                } else {
+                    nav.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
